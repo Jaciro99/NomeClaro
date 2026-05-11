@@ -1,7 +1,7 @@
-import surnameCategoriesData from "@/data/surname-categories.json";
 import surnamesData from "@/data/surnames.json";
 import { normalizeText } from "@/lib/names";
-import type { SurnameCategory, SurnameCategoryInfo, SurnameEntry } from "@/types/surname";
+import { surnameCategories } from "@/lib/surname-categories";
+import type { SurnameCategory, SurnameEntry } from "@/types/surname";
 
 const rawSurnames = surnamesData as SurnameEntry[];
 
@@ -21,7 +21,7 @@ function getUniqueSurnamesBySlug(entries: SurnameEntry[]) {
   });
 }
 
-export const surnameCategories = surnameCategoriesData as SurnameCategoryInfo[];
+export { surnameCategories };
 const surnames = getUniqueSurnamesBySlug(rawSurnames);
 
 export function getAllSurnames() {

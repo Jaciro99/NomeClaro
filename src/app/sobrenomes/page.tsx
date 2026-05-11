@@ -14,6 +14,7 @@ import {
 } from "@/lib/filters";
 import { absoluteUrl } from "@/lib/names";
 import { buildPaginatedHref, NAMES_PER_PAGE, paginate, parsePage } from "@/lib/pagination";
+import { getOpenGraphDefaults } from "@/lib/seo";
 import { getAllSurnames } from "@/lib/surnames";
 
 type SurnamesPageProps = {
@@ -51,6 +52,9 @@ export async function generateMetadata({ searchParams }: SurnamesPageProps): Pro
     robots:
       hasFilters || filteredSurnames.length === 0 ? { index: false, follow: true } : undefined,
     openGraph: {
+      ...getOpenGraphDefaults(
+        hasFilters ? "/sobrenomes" : buildPaginatedHref("/sobrenomes", currentPage)
+      ),
       title,
       description,
       url: canonical,

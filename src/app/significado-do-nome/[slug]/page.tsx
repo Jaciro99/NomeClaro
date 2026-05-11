@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { NameCard } from "@/components/NameCard";
 import { SearchBox } from "@/components/SearchBox";
 import { getAllNames, getNameBySlug, getRelatedEntries, absoluteUrl } from "@/lib/names";
+import { getOpenGraphDefaults } from "@/lib/seo";
 
 type NamePageProps = {
   params: Promise<{
@@ -35,6 +36,7 @@ export async function generateMetadata({ params }: NamePageProps): Promise<Metad
       canonical: url
     },
     openGraph: {
+      ...getOpenGraphDefaults(`/significado-do-nome/${entry.slug}`),
       title: entry.metaTitle,
       description: entry.metaDescription,
       url,

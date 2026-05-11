@@ -3,13 +3,24 @@ import { CategoryPill } from "@/components/CategoryPill";
 import { NameCard } from "@/components/NameCard";
 import { SurnameCategoryPill } from "@/components/SurnameCategoryPill";
 import { categories } from "@/lib/categories";
-import { getPopularNames } from "@/lib/names";
-import { surnameCategories } from "@/lib/surnames";
+import { absoluteUrl, getPopularNames } from "@/lib/names";
+import { getOpenGraphDefaults } from "@/lib/seo";
+import { surnameCategories } from "@/lib/surname-categories";
 
 export const metadata: Metadata = {
   title: "Categorias de nomes",
   description:
-    "Explore nomes masculinos, femininos, bíblicos, curtos, diferentes, clássicos e internacionais."
+    "Explore nomes masculinos, femininos, bíblicos, curtos, diferentes, clássicos, internacionais e categorias de sobrenomes.",
+  alternates: {
+    canonical: absoluteUrl("/categorias")
+  },
+  openGraph: {
+    ...getOpenGraphDefaults("/categorias"),
+    title: "Categorias de nomes e sobrenomes",
+    description:
+      "Explore categorias principais de nomes e sobrenomes com páginas indexáveis e organizadas.",
+    type: "website"
+  }
 };
 
 export default function CategoriesPage() {

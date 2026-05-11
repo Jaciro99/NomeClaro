@@ -14,6 +14,7 @@ import {
 } from "@/lib/filters";
 import { absoluteUrl } from "@/lib/names";
 import { buildPaginatedHref, NAMES_PER_PAGE, paginate, parsePage } from "@/lib/pagination";
+import { getOpenGraphDefaults } from "@/lib/seo";
 import {
   getSurnameCategoryBySlug,
   getSurnamesByCategory,
@@ -71,6 +72,7 @@ export async function generateMetadata({
     },
     robots: hasFilters || filteredSurnames.length === 0 ? { index: false, follow: true } : undefined,
     openGraph: {
+      ...getOpenGraphDefaults(hasFilters ? categoryPath : buildPaginatedHref(categoryPath, currentPage)),
       title,
       description: category.description,
       url: canonical,

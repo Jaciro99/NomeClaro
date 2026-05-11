@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { NotFoundSearchBox } from "@/components/NotFoundSearchBox";
+import { getRobotsMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Página não encontrada",
+  description:
+    "A página solicitada não foi encontrada. Pesquise um nome ou sobrenome no NomeClaro.",
+  robots: getRobotsMetadata(true)
+};
 
 export default function NotFound() {
   return (

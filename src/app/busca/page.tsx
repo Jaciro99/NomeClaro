@@ -20,6 +20,7 @@ import {
 import { absoluteUrl, findNameByQuery, getAllNames, searchNames } from "@/lib/names";
 import { NAMES_PER_PAGE, paginate, parsePage } from "@/lib/pagination";
 import { findSurnameByQuery, getAllSurnames, searchSurnames } from "@/lib/surnames";
+import { getOpenGraphDefaults, getRobotsMetadata } from "@/lib/seo";
 import type { NameEntry } from "@/types/name";
 import type { SurnameEntry } from "@/types/surname";
 
@@ -40,6 +41,10 @@ type SearchResult =
 export async function generateMetadata({ searchParams }: SearchPageProps): Promise<Metadata> {
   const resolvedSearchParams = await searchParams;
   const hasFilters = hasActiveFilters(resolvedSearchParams);
+  const queryValue = Array.isArray(resolvedSearchParams?.q)
+    ? resolvedSearchParams?.q[0]
+    : resolvedSearchParams?.q;
+  const hasQuery = Boolean(queryValue?.trim());
 
   return {
     title: "Buscar significado de nomes e sobrenomes",
@@ -48,7 +53,14 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
     alternates: {
       canonical: absoluteUrl("/busca")
     },
-    robots: hasFilters ? { index: false, follow: true } : undefined
+    robots: hasFilters || hasQuery ? getRobotsMetadata(true) : undefined,
+    openGraph: {
+      ...getOpenGraphDefaults("/busca"),
+      title: "Buscar significado de nomes e sobrenomes",
+      description:
+        "Busque nomes e sobrenomes disponíveis na base e acesse páginas completas com significado, origem e curiosidades.",
+      type: "website"
+    }
   };
 }
 

@@ -1,6 +1,6 @@
 import { categories } from "@/lib/categories";
 import { normalizeText } from "@/lib/names";
-import { surnameCategories } from "@/lib/surnames";
+import { surnameCategories } from "@/lib/surname-categories";
 import type { NameEntry } from "@/types/name";
 import type { SurnameEntry } from "@/types/surname";
 

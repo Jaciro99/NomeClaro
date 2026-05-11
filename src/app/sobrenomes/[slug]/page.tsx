@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { SearchBox } from "@/components/SearchBox";
 import { SurnameCard } from "@/components/SurnameCard";
 import { absoluteUrl } from "@/lib/names";
+import { getOpenGraphDefaults } from "@/lib/seo";
 import {
   getAllSurnames,
   getRelatedSurnameEntries,
@@ -40,6 +41,7 @@ export async function generateMetadata({ params }: SurnamePageProps): Promise<Me
       canonical: url
     },
     openGraph: {
+      ...getOpenGraphDefaults(`/sobrenomes/${entry.slug}`),
       title: entry.metaTitle,
       description: entry.metaDescription,
       url,

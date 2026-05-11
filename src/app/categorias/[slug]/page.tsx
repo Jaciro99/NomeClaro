@@ -15,6 +15,7 @@ import {
 } from "@/lib/filters";
 import { absoluteUrl, getCategoryBySlug, getNamesByCategory } from "@/lib/names";
 import { buildPaginatedHref, NAMES_PER_PAGE, paginate, parsePage } from "@/lib/pagination";
+import { getOpenGraphDefaults } from "@/lib/seo";
 import type { NameCategory } from "@/types/name";
 
 type CategoryPageProps = {
@@ -68,6 +69,7 @@ export async function generateMetadata({
     },
     robots: hasFilters || categoryNames.length === 0 ? { index: false, follow: true } : undefined,
     openGraph: {
+      ...getOpenGraphDefaults(hasFilters ? categoryPath : buildPaginatedHref(categoryPath, currentPage)),
       title,
       description: category.description,
       url: canonical,

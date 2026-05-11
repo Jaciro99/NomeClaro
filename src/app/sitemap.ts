@@ -9,37 +9,39 @@ import {
 } from "@/lib/surnames";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date();
+
   const staticRoutes = ["", "/busca", "/categorias", "/nomes", "/sobrenomes"].map((path) => ({
     url: absoluteUrl(path || "/"),
-    lastModified: new Date(),
+    lastModified,
     changeFrequency: "weekly" as const,
     priority: path === "" ? 1 : 0.7
   }));
 
   const nameRoutes = getAllNames().map((entry) => ({
     url: absoluteUrl(`/significado-do-nome/${entry.slug}`),
-    lastModified: new Date(),
+    lastModified,
     changeFrequency: "monthly" as const,
     priority: 0.9
   }));
 
   const categoryRoutes = categories.map((category) => ({
     url: absoluteUrl(`/categorias/${category.slug}`),
-    lastModified: new Date(),
+    lastModified,
     changeFrequency: "weekly" as const,
     priority: 0.8
   }));
 
   const surnameRoutes = getAllSurnames().map((entry) => ({
     url: absoluteUrl(`/sobrenomes/${entry.slug}`),
-    lastModified: new Date(),
+    lastModified,
     changeFrequency: "monthly" as const,
     priority: 0.9
   }));
 
   const surnameCategoryRoutes = surnameCategories.map((category) => ({
     url: absoluteUrl(`/categorias/sobrenomes/${category.slug}`),
-    lastModified: new Date(),
+    lastModified,
     changeFrequency: "weekly" as const,
     priority: 0.8
   }));
@@ -49,7 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { length: Math.max(0, namesPagination.totalPages - 1) },
     (_, index) => ({
       url: absoluteUrl(buildPaginatedHref("/nomes", index + 2)),
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.6
     })
@@ -60,7 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return Array.from({ length: Math.max(0, pagination.totalPages - 1) }, (_, index) => ({
       url: absoluteUrl(buildPaginatedHref(`/categorias/${category.slug}`, index + 2)),
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.6
     }));
@@ -71,7 +73,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { length: Math.max(0, surnamesPagination.totalPages - 1) },
     (_, index) => ({
       url: absoluteUrl(buildPaginatedHref("/sobrenomes", index + 2)),
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.6
     })
@@ -82,7 +84,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return Array.from({ length: Math.max(0, pagination.totalPages - 1) }, (_, index) => ({
       url: absoluteUrl(buildPaginatedHref(`/categorias/sobrenomes/${category.slug}`, index + 2)),
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.6
     }));

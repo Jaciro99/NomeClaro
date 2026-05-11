@@ -61,7 +61,11 @@ export function buildPaginatedHref(
     }
   });
 
-  searchParams.set("page", String(Math.max(1, page)));
+  const safePage = Math.max(1, page);
+
+  if (safePage > 1) {
+    searchParams.set("page", String(safePage));
+  }
 
   const queryString = searchParams.toString();
 

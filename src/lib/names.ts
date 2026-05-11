@@ -2,8 +2,18 @@ import namesData from "@/data/names.json";
 import { categories } from "@/lib/categories";
 import type { NameCategory, NameEntry } from "@/types/name";
 
-export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://significadodenomes.example.com";
+function normalizeSiteUrl(value: string) {
+  const withProtocol = /^https?:\/\//.test(value) ? value : `https://${value}`;
+
+  return withProtocol.replace(/\/+$/, "");
+}
+
+export const siteUrl = normalizeSiteUrl(
+  process.env.NEXT_PUBLIC_SITE_URL ??
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ??
+    process.env.VERCEL_URL ??
+    "https://significadodenomes.example.com"
+);
 
 const rawNames = namesData as NameEntry[];
 
