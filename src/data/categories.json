@@ -1,0 +1,37 @@
+[
+  {
+    "slug": "masculinos",
+    "title": "Nomes masculinos",
+    "description": "Opções populares, clássicas e modernas para meninos."
+  },
+  {
+    "slug": "femininos",
+    "title": "Nomes femininos",
+    "description": "Nomes delicados, fortes e cheios de história para meninas."
+  },
+  {
+    "slug": "biblicos",
+    "title": "Nomes bíblicos",
+    "description": "Nomes de tradição religiosa e presença cultural duradoura."
+  },
+  {
+    "slug": "curtos",
+    "title": "Nomes curtos",
+    "description": "Escolhas simples, sonoras e fáceis de lembrar."
+  },
+  {
+    "slug": "diferentes",
+    "title": "Nomes diferentes",
+    "description": "Alternativas menos comuns para quem busca personalidade."
+  },
+  {
+    "slug": "classicos",
+    "title": "Nomes clássicos",
+    "description": "Nomes conhecidos, elegantes e sempre atuais."
+  },
+  {
+    "slug": "internacionais",
+    "title": "Nomes internacionais",
+    "description": "Nomes usados em diferentes países e idiomas."
+  }
+]

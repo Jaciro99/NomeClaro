@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "brasileiros",
+    "title": "Sobrenomes brasileiros",
+    "description": "Sobrenomes muito presentes no Brasil, com diferentes origens e histórias familiares."
+  },
+  {
+    "slug": "portugueses",
+    "title": "Sobrenomes portugueses",
+    "description": "Sobrenomes de origem portuguesa ou muito difundidos pela cultura lusófona."
+  },
+  {
+    "slug": "italianos",
+    "title": "Sobrenomes italianos",
+    "description": "Sobrenomes ligados à tradição italiana e à imigração no Brasil."
+  },
+  {
+    "slug": "espanhóis",
+    "title": "Sobrenomes espanhóis",
+    "description": "Sobrenomes de origem espanhola e presença em países de língua espanhola."
+  },
+  {
+    "slug": "japoneses",
+    "title": "Sobrenomes japoneses",
+    "description": "Sobrenomes japoneses com significados ligados à natureza, lugares e famílias."
+  },
+  {
+    "slug": "alemães",
+    "title": "Sobrenomes alemães",
+    "description": "Sobrenomes de origem alemã, muitos relacionados a profissões, lugares e características."
+  },
+  {
+    "slug": "franceses",
+    "title": "Sobrenomes franceses",
+    "description": "Sobrenomes franceses com história, tradição e presença internacional."
+  },
+  {
+    "slug": "populares",
+    "title": "Sobrenomes populares",
+    "description": "Sobrenomes bastante conhecidos e frequentes em diferentes regiões."
+  },
+  {
+    "slug": "raros",
+    "title": "Sobrenomes raros",
+    "description": "Sobrenomes menos comuns, diferentes ou com presença mais específica."
+  },
+  {
+    "slug": "internacionais",
+    "title": "Sobrenomes internacionais",
+    "description": "Sobrenomes usados em diferentes países e culturas."
+  }
+]
