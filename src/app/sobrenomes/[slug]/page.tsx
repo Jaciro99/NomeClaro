@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { JsonLd } from "@/components/JsonLd";
 import { SearchBox } from "@/components/SearchBox";
 import { SurnameCard } from "@/components/SurnameCard";
+import { ADS_ENABLED } from "@/lib/ads";
 import { absoluteUrl } from "@/lib/names";
 import { getOpenGraphDefaults } from "@/lib/seo";
 import {
@@ -115,9 +116,11 @@ export default async function SurnamePage({ params }: SurnamePageProps) {
               </dl>
             </header>
 
-            <div className="mt-6">
-              <AdPlaceholder position="top" />
-            </div>
+            {ADS_ENABLED ? (
+              <div className="mt-6">
+                <AdPlaceholder position="top" />
+              </div>
+            ) : null}
 
             <section className="mt-8 rounded-md border border-ink/10 bg-white p-6 shadow-line sm:p-8">
               <h2 className="text-3xl font-black text-ink">Origem e significado de {entry.surname}</h2>
@@ -140,9 +143,11 @@ export default async function SurnamePage({ params }: SurnamePageProps) {
               </ul>
             </section>
 
-            <div className="mt-6">
-              <AdPlaceholder position="middle" />
-            </div>
+            {ADS_ENABLED ? (
+              <div className="mt-6">
+                <AdPlaceholder position="middle" />
+              </div>
+            ) : null}
 
             <section className="mt-6 grid gap-6 md:grid-cols-2">
               <div className="rounded-md border border-ink/10 bg-white p-6 shadow-line">
@@ -189,13 +194,15 @@ export default async function SurnamePage({ params }: SurnamePageProps) {
               </div>
             </section>
 
-            <div className="mt-8">
-              <AdPlaceholder position="bottom" />
-            </div>
+            {ADS_ENABLED ? (
+              <div className="mt-8">
+                <AdPlaceholder position="bottom" />
+              </div>
+            ) : null}
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-            <AdPlaceholder position="sidebar" />
+            {ADS_ENABLED ? <AdPlaceholder position="sidebar" /> : null}
             <div className="rounded-md border border-ink/10 bg-white p-5 shadow-line">
               <h2 className="text-xl font-black text-ink">Buscar sobrenome</h2>
               <p className="mt-2 text-sm leading-6 text-ink/65">

@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { JsonLd } from "@/components/JsonLd";
 import { NameCard } from "@/components/NameCard";
 import { SearchBox } from "@/components/SearchBox";
+import { ADS_ENABLED } from "@/lib/ads";
 import { getAllNames, getNameBySlug, getRelatedEntries, absoluteUrl } from "@/lib/names";
 import { getOpenGraphDefaults } from "@/lib/seo";
 
@@ -106,9 +107,11 @@ export default async function NamePage({ params }: NamePageProps) {
               </dl>
             </header>
 
-            <div className="mt-6">
-              <AdPlaceholder position="top" />
-            </div>
+            {ADS_ENABLED ? (
+              <div className="mt-6">
+                <AdPlaceholder position="top" />
+              </div>
+            ) : null}
 
             <section className="mt-8 rounded-md border border-ink/10 bg-white p-6 shadow-line sm:p-8">
               <h2 className="text-3xl font-black text-ink">Origem e significado de {entry.name}</h2>
@@ -126,9 +129,11 @@ export default async function NamePage({ params }: NamePageProps) {
               </ul>
             </section>
 
-            <div className="mt-6">
-              <AdPlaceholder position="middle" />
-            </div>
+            {ADS_ENABLED ? (
+              <div className="mt-6">
+                <AdPlaceholder position="middle" />
+              </div>
+            ) : null}
 
             <section className="mt-6 grid gap-6 md:grid-cols-2">
               <div className="rounded-md border border-ink/10 bg-white p-6 shadow-line">
@@ -158,7 +163,7 @@ export default async function NamePage({ params }: NamePageProps) {
             </section>
 
             <section className="mt-8">
-              <h2 className="text-3xl font-black text-ink">Nomes relacionados a {entry.name}</h2>
+              <h2 className="text-3xl font-black text-ink">{entry.name} combina com</h2>
               <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {relatedEntries.map((related) => (
                   <NameCard entry={related} key={related.slug} />
@@ -175,13 +180,15 @@ export default async function NamePage({ params }: NamePageProps) {
               </div>
             </section>
 
-            <div className="mt-8">
-              <AdPlaceholder position="bottom" />
-            </div>
+            {ADS_ENABLED ? (
+              <div className="mt-8">
+                <AdPlaceholder position="bottom" />
+              </div>
+            ) : null}
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-            <AdPlaceholder position="sidebar" />
+            {ADS_ENABLED ? <AdPlaceholder position="sidebar" /> : null}
             <div className="rounded-md border border-ink/10 bg-white p-5 shadow-line">
               <h2 className="text-xl font-black text-ink">Buscar outro nome</h2>
               <p className="mt-2 text-sm leading-6 text-ink/65">

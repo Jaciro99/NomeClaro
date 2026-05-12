@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FooterLinks } from "@/components/FooterLinks";
 import { categories } from "@/lib/categories";
 
 export function Footer() {
@@ -15,21 +16,10 @@ export function Footer() {
           </p>
         </div>
         <nav aria-label="Links do rodapé" className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-          <Link className="text-sm font-medium text-ink/70 hover:text-coral" href="/nomes">
-            Todos os nomes
-          </Link>
-          <Link className="text-sm font-medium text-ink/70 hover:text-coral" href="/sobrenomes">
-            Sobrenomes
-          </Link>
-          <Link className="text-sm font-medium text-ink/70 hover:text-coral" href="/busca">
-            Buscar
-          </Link>
-          <Link className="text-sm font-medium text-ink/70 hover:text-coral" href="/categorias">
-            Categorias
-          </Link>
+          <FooterLinks />
           {categories.slice(0, 4).map((category) => (
             <Link
-              className="text-sm font-medium text-ink/70 hover:text-coral"
+              className="text-sm font-medium text-ink/70 transition hover:text-coral"
               href={`/categorias/${category.slug}`}
               key={category.slug}
             >

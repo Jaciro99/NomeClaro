@@ -6,6 +6,7 @@ import { NameCard } from "@/components/NameCard";
 import { SearchBox } from "@/components/SearchBox";
 import { SurnameCard } from "@/components/SurnameCard";
 import { SurnameCategoryPill } from "@/components/SurnameCategoryPill";
+import { ADS_ENABLED } from "@/lib/ads";
 import { categories } from "@/lib/categories";
 import { absoluteUrl, getCategoryGroups, getPopularNames } from "@/lib/names";
 import { getPopularSurnames, surnameCategories } from "@/lib/surnames";
@@ -14,6 +15,9 @@ export default function HomePage() {
   const popularNames = getPopularNames(8);
   const popularSurnames = getPopularSurnames(4);
   const categoryGroups = getCategoryGroups().slice(0, 5);
+  const sectionGridClass = ADS_ENABLED
+    ? "grid gap-5 lg:grid-cols-[1fr_300px]"
+    : "grid gap-5";
 
   return (
     <>
@@ -63,9 +67,11 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <div className="mt-5">
-              <AdPlaceholder position="top" />
-            </div>
+            {ADS_ENABLED ? (
+              <div className="mt-5">
+                <AdPlaceholder position="top" />
+              </div>
+            ) : null}
           </div>
         </div>
       </section>
@@ -137,7 +143,7 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-12">
-        <div className="grid gap-5 lg:grid-cols-[1fr_300px]">
+        <div className={sectionGridClass}>
           <div className="grid gap-5">
             {categoryGroups.map((category) => (
               <div className="rounded-md border border-ink/10 bg-white p-5 shadow-line" key={category.slug}>
@@ -164,9 +170,11 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <div className="lg:sticky lg:top-24 lg:self-start">
-            <AdPlaceholder position="sidebar" />
-          </div>
+          {ADS_ENABLED ? (
+            <div className="lg:sticky lg:top-24 lg:self-start">
+              <AdPlaceholder position="sidebar" />
+            </div>
+          ) : null}
         </div>
       </section>
     </>

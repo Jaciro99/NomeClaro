@@ -1,3 +1,5 @@
+import { ADS_ENABLED } from "@/lib/ads";
+
 type AdPlaceholderProps = {
   position: "top" | "middle" | "sidebar" | "bottom";
 };
@@ -10,6 +12,10 @@ const positionLabels: Record<AdPlaceholderProps["position"], string> = {
 };
 
 export function AdPlaceholder({ position }: AdPlaceholderProps) {
+  if (!ADS_ENABLED) {
+    return null;
+  }
+
   const isSidebar = position === "sidebar";
 
   return (

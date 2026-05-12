@@ -41,10 +41,7 @@ type SearchResult =
 export async function generateMetadata({ searchParams }: SearchPageProps): Promise<Metadata> {
   const resolvedSearchParams = await searchParams;
   const hasFilters = hasActiveFilters(resolvedSearchParams);
-  const queryValue = Array.isArray(resolvedSearchParams?.q)
-    ? resolvedSearchParams?.q[0]
-    : resolvedSearchParams?.q;
-  const hasQuery = Boolean(queryValue?.trim());
+  const hasDynamicQuery = Object.keys(resolvedSearchParams ?? {}).length > 0;
 
   return {
     title: "Buscar significado de nomes e sobrenomes",
@@ -53,7 +50,7 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
     alternates: {
       canonical: absoluteUrl("/busca")
     },
-    robots: hasFilters || hasQuery ? getRobotsMetadata(true) : undefined,
+    robots: hasFilters || hasDynamicQuery ? getRobotsMetadata(true) : undefined,
     openGraph: {
       ...getOpenGraphDefaults("/busca"),
       title: "Buscar significado de nomes e sobrenomes",
@@ -66,16 +63,21 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const resolvedSearchParams = await searchParams;
+  const hasSearchQueryParam = Object.prototype.hasOwnProperty.call(
+    resolvedSearchParams ?? {},
+    "q"
+  );
   const queryValue = Array.isArray(resolvedSearchParams?.q)
     ? resolvedSearchParams?.q[0]
     : resolvedSearchParams?.q;
   const query = queryValue?.trim() ?? "";
+  const hasEmptySearch = hasSearchQueryParam && !query;
   const requestedPage = parsePage(resolvedSearchParams?.page);
   const hasFilters = hasActiveFilters(resolvedSearchParams);
   const match = query ? findNameByQuery(query) : undefined;
   const surnameMatch = query ? findSurnameByQuery(query) : undefined;
-  const nameMatches = query ? searchNames(query) : getAllNames();
-  const surnameMatches = query ? searchSurnames(query) : getAllSurnames();
+  const nameMatches = hasEmptySearch ? [] : query ? searchNames(query) : getAllNames();
+  const surnameMatches = hasEmptySearch ? [] : query ? searchSurnames(query) : getAllSurnames();
   const filteredNameMatches = applyNameFilters(nameMatches, resolvedSearchParams);
   const filteredSurnameMatches =
     getParamValues(resolvedSearchParams?.gender).length > 0
@@ -130,13 +132,21 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         />
       </div>
 
-      {query && pagination.totalItems === 0 ? (
+      {hasEmptySearch || (query && pagination.totalItems === 0) ? (
         <div className="mt-10 rounded-md border border-ink/10 bg-white p-6 shadow-line">
-          <h2 className="text-2xl font-black text-ink">Termo ainda não cadastrado</h2>
+          <h2 className="text-2xl font-black text-ink">
+            {hasEmptySearch ? "Digite um nome ou sobrenome" : "Termo ainda não cadastrado"}
+          </h2>
           <p className="mt-3 leading-7 text-ink/68">
-            <strong>{query}</strong> ainda não está nas bases atuais. Você pode
-            adicionar nomes em <code>src/data/names.json</code> ou sobrenomes em{" "}
-            <code>src/data/surnames.json</code>.
+            {hasEmptySearch ? (
+              "Use o campo de busca para consultar a base de nomes e sobrenomes."
+            ) : (
+              <>
+                <strong>{query}</strong> ainda não está nas bases atuais. Mas fique
+                tranquilo, recebemos sua busca e em alguns dias o significado desse
+                nome estará aqui =)
+              </>
+            )}
           </p>
         </div>
       ) : null}
