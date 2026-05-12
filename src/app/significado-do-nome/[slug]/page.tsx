@@ -16,6 +16,28 @@ type NamePageProps = {
   }>;
 };
 
+const dillianyEasterEgg = `O significado do seu nome é bonito, mas não tanto quanto a pessoa que o carrega.
+Você é linda, engraçada, esforçada, guerreira e fofa ao mesmo tempo… como pode? Não pode. Só você mesmo.
+
+Te amo, Dilly, e não tenho dúvidas de que minha vida ficou muito mais feliz depois que você entrou nela. Até porque, com você, eu sempre quero dar o melhor de mim em qualquer área, porque você merece.
+
+Te amo demais!
+
+        *****           *****
+     ***********     ***********
+   *************** ***************
+  *********************************
+  *********************************
+   *******************************
+     ***************************
+       ***********************
+         *******************
+           ***************
+             ***********
+               *******
+                 ***
+                  *`;
+
 export function generateStaticParams() {
   return getAllNames().map((entry) => ({ slug: entry.slug }));
 }
@@ -201,6 +223,13 @@ export default async function NamePage({ params }: NamePageProps) {
           </aside>
         </div>
       </article>
+      {entry.slug === "dilliany" ? (
+        <template
+          dangerouslySetInnerHTML={{
+            __html: `<!--\n${dillianyEasterEgg}\n-->`
+          }}
+        />
+      ) : null}
     </>
   );
 }

@@ -2,22 +2,20 @@
 
 import Link from "next/link";
 import { useSyncExternalStore } from "react";
-
-const CONSENT_STORAGE_KEY = "nomeclaro_cookie_consent";
-const CONSENT_EVENT = "nomeclaro-cookie-consent";
-
-function subscribe(callback: () => void) {
-  window.addEventListener(CONSENT_EVENT, callback);
-
-  return () => window.removeEventListener(CONSENT_EVENT, callback);
-}
-
-function getConsentSnapshot() {
-  return localStorage.getItem(CONSENT_STORAGE_KEY) ?? "";
-}
+import {
+  CONSENT_EVENT,
+  CONSENT_STORAGE_KEY,
+  getConsentSnapshot,
+  getServerConsentSnapshot,
+  subscribeToConsent
+} from "@/lib/consent";
 
 export function CookieBanner() {
-  const consent = useSyncExternalStore(subscribe, getConsentSnapshot, () => "accepted");
+  const consent = useSyncExternalStore(
+    subscribeToConsent,
+    getConsentSnapshot,
+    getServerConsentSnapshot
+  );
   const visible = consent !== "accepted";
 
   function acceptCookies() {

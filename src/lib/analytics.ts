@@ -1,0 +1,2 @@
+export const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "G-1B0XRK5JZS";

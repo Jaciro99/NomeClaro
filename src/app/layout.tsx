@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Footer } from "@/components/Footer";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { Header } from "@/components/Header";
 import { absoluteUrl, siteUrl } from "@/lib/names";
 import {
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main>{children}</main>
         <Footer />
+        <GoogleAnalytics />
         <CookieBanner />
       </body>
     </html>
