@@ -90,15 +90,6 @@ export default function PrivacyPolicyPage() {
           momento, não mantemos uma área de conta com dados pessoais editáveis.
         </p>
       </section>
-
-      <section className="space-y-4">
-        <h2>7. Contato</h2>
-        <p>
-          Para dúvidas sobre privacidade, use o contato placeholder:{" "}
-          <strong>privacidade@nomeclaro.com.br</strong>. Substitua este endereço
-          pelo canal oficial antes da publicação final.
-        </p>
-      </section>
     </LegalPageLayout>
   );
 }
